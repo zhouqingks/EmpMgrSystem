@@ -12,6 +12,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.cheer.domain.User;
+import com.cheer.service.UserService;
+
 
 /**
  * Servlet implementation class Login
@@ -44,10 +47,13 @@ public class Login extends HttpServlet
         LOGGER.info(username);
         LOGGER.info(password);
         HttpSession session = request.getSession();
-        if ("admin".equals(username) && "admin".equals(password))
+        UserService userService = (UserService)this.getServletContext().getAttribute("userService");
+        User user = userService.find(username);
+        if (user!=null && user.getPassword().equals(password))
         {
+            session.setAttribute("isLogin", true);
             session.setAttribute("username", username);
-            response.sendRedirect(request.getContextPath() + "/hello.jsp");
+            response.sendRedirect(request.getContextPath() + "/emp.jsp");
         }
         else
         {

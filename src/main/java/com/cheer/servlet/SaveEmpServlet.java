@@ -24,8 +24,6 @@ public class SaveEmpServlet extends HttpServlet
 
     private static final Logger LOGGER = LogManager.getLogger(SaveEmpServlet.class);
 
-    private static final String Emp = null;
-
     public SaveEmpServlet()
     {}
 

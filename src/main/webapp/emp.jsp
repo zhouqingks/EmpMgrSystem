@@ -4,6 +4,7 @@
 	pageEncoding="utf-8"%>
 <%@ page
 	import="com.cheer.domain.*, com.cheer.util.*, java.util.*, java.sql.*, com.cheer.service.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,6 +33,25 @@
 		</tr>
 		<%
 		    EmpService empService = (EmpService)application.getAttribute("empService");
+			List<Emp> list = empService.getAll();
+			request.setAttribute("list", list);
+		%>
+		<c:forEach var="emp1" items="${list}">
+			<tr>
+			<td>${emp1.empno}</td>
+			<td>${emp1.ename}</td>
+			<td>${emp1.job}</td>
+			<td>${emp1.mgr}</td>
+			<td>${emp1.hiredate}</td>
+			<td>${emp1.sal}</td>
+			<td>${emp1.comm}</td>
+			<td>${emp1.deptno}</td>
+			<td><a href="servlet/delEmp1?empno=${emp1.empno}">删除</a>&nbsp<a
+				href="updateEmp.jsp?empno=${emp1.empno}">修改</a></td>
+		</tr>
+		</c:forEach>
+		<!-- 
+		<%
 		    for (Emp emp : empService.getAll())
 		    {
 		%>
@@ -50,6 +70,7 @@
 		<%
 		    }
 		%>
+		 -->
 	</table>
 </body>
 </html>

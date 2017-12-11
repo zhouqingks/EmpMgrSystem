@@ -11,9 +11,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.cheer.dao.EmpDao;
+import com.cheer.dao.UserDao;
 import com.cheer.dao.impl.EmpDaoImpl;
+import com.cheer.dao.impl.UserDaoImpl;
 import com.cheer.service.EmpService;
+import com.cheer.service.UserService;
 import com.cheer.service.impl.EmpServiceImpl;
+import com.cheer.service.impl.UserServiceImpl;
 
 
 @WebListener
@@ -33,6 +37,12 @@ public class BeanRegistListener implements ServletContextListener
         EmpService empService = new EmpServiceImpl(empDao);
 
         application.setAttribute("empService", empService);
+        
+        UserDao userDao = new UserDaoImpl();
+        
+        UserService userService = new UserServiceImpl(userDao);
+        
+        application.setAttribute("userService", userService);
 
     }
 

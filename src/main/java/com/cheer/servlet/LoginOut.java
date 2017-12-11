@@ -38,7 +38,7 @@ public class LoginOut extends HttpServlet
     {
         HttpSession session = request.getSession();
         session.setAttribute("err", null);
-        response.setContentType("text/html;charset=utf-8");
+        response.setContentType("text/html");
         request.getSession().invalidate();
         
         PrintWriter pw = response.getWriter();

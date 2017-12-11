@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.cheer.domain.User;
+import com.cheer.service.EmpService;
+import com.cheer.service.UserService;
+
 
 @WebServlet(name = "validateServlet", urlPatterns = {"/servlet/validate"})
 public class ValidateServlet extends HttpServlet
@@ -28,11 +32,14 @@ public class ValidateServlet extends HttpServlet
     {
         LOGGER.info("doGet method is invoked...");
         
-        response.setContentType("application/json;charset=utf-8");
+        UserService userService = (UserService)this.getServletContext().getAttribute("userService");
+        response.setContentType("application/json");
         PrintWriter pw = response.getWriter();
         String username = request.getParameter("username");
         
-        if ("admin123".equals(username))
+        User user = userService.find(username);
+        
+        if (user != null)
         {
             pw.print("{\"result\":1}");
             pw.close();
